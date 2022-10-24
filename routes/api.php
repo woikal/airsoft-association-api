@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\V1\ClubController;
+use App\Http\Controllers\Api\V1\ProvinceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::group(['prefix' => 'v1'], function () {
+    // DE
+    Route::apiResource('clubs', ClubController::class);
+    Route::apiResource('provinces', ProvinceController::class);
 });
