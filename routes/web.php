@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ParseController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/form', [ParseController::class, 'form'])->name('parser.form');
+Route::post('/parse', [ParseController::class, 'parse'])->name('parser.parse');
