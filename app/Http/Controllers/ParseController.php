@@ -2,35 +2,51 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ParsePdfRequest;
-use App\Models\AssociationExcerptParser;
+use App\Http\Requests\LoadPdfRequest;
+use App\Models\AssociationParser;
+use Illuminate\Http\Response;
 
 class ParseController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function form()
+    public function form(): Response
     {
-        return view('pdf-parser.form');
+        return response()->view('pdf-parser.form');
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function parse(ParsePdfRequest $request)
+    public function load(LoadPdfRequest $request): Response
     {
-        $pdf = $request->file('pdf');
+        $associations = collect();
 
-        $parser = new AssociationExcerptParser($pdf);
-        $association = $parser->parse();
-        dd($request->file('pdf'));
-        $content = $request->toArray();
+        if ($request->file('files')) {
+            $parser = new AssociationParser();
+            foreach ($request->file('files') as $file) {
+                if (!$file->isValid()) {
+                    continue;
+                }
+                $parser->setFile($file);
+                $associations->add($parser->parse());
 
-        return view('pdf-parser.show', ['content' => $content]);
+                {
+                    $fileName = time() . rand(1, 99) . '.' . $file->extension();
+
+                    $file->move(public_path('uploads'), $fileName);
+
+                    $files[]['name'] = $fileName;
+                }
+            }
+        }
+
+        return response()->view('pdf-parser.show', ['associations' => $associations]);
     }
+
 }

@@ -19,4 +19,4 @@ Route::get('/', function () {
 });
 
 Route::get('/form', [ParseController::class, 'form'])->name('parser.form');
-Route::post('/parse', [ParseController::class, 'parse'])->name('parser.parse');
+Route::post('/parse', [ParseController::class, 'load'])->name('parser.load');

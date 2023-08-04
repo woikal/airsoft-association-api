@@ -3,17 +3,47 @@
 @section('title', 'PDF parser')
 
 @section('content')
-    test
-    <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-        <form method="post" action="/parse" enctype="multipart/form-data">
-            @csrf
+    <div class="container">
+        <div class="panel panel-primary">
 
-            <label for="pdf">ZVR-Auszug</label>
+            <div class="panel-body">
+                @if($message = Session::get('success'))
 
-            <input type="file"
-                   id="pdf" name="pdf"
-                   accept="application/pdf">
-            <button type="submit">Einlesen</button>
-        </form>
+                    <div class="alert alert-success alert-block">
+
+                        <strong>{{ $message }}</strong>
+
+                    </div>
+
+                @endif
+            </div>
+
+            <form method="post" action="{{ route('parser.load') }}" enctype="multipart/form-data">
+                @csrf
+
+                <label for="files">ZVR-Auszug</label>
+
+                <div class="mb-3">
+
+                    <label class="form-label" for="inputFile">Select Files:</label>
+
+                    <input
+                        type="file"
+                        name="files[]"
+                        id="inputFile"
+                        multiple
+                        class="form-control @error('files') is-invalid @enderror">
+
+                    @error('files')
+
+                    <span class="text-danger">{{ $message }}</span>
+
+                    @enderror
+
+                </div>
+
+                <button type="submit">Einlesen</button>
+            </form>
+        </div>
     </div>
 @endsection
