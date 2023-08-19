@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoadPdfRequest;
+use App\Http\Requests\StoreClubRequest;
 use App\Models\AssociationParser;
 use Illuminate\Http\Response;
 
@@ -48,5 +49,4 @@ class ParseController extends Controller
 
         return response()->view('pdf-parser.show', ['associations' => $associations]);
     }
-
 }

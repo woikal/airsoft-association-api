@@ -23,6 +23,7 @@ class AssociationParser
     protected Parser $parser;
     protected Document $document;
     protected Collection $rawData;
+    protected string $zvr;
 
     /**
      * @throws \Exception
@@ -50,7 +51,6 @@ class AssociationParser
         $this->rawData = $this->parseContents($pages);
 
         $officials = collect();
-        $idx = 0;
         foreach ($this->rawData as $idx => $raw) {
             switch ($this->rawData->get($idx)) {
             case self::LABEL_HEADER:
@@ -101,6 +101,29 @@ class AssociationParser
             'foundedAt'     => $foundedAt ?? null,
             'officials'     => $officials,
         ]);
+    }
+
+    public function validate()
+    {
+        $pages = $this->document->getPages();
+        foreach ($pages[0]->getTextArray() as $fragment) {
+            if (preg_match('#^\d{9,12}$#', $fragment, $matches)) {
+                $this->zvr = $matches[0];
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function getZvr(): string
+    {
+        if (!isset($this->zvr)) {
+            $this->validate();
+        }
+
+        return $this->zvr ?? '';
     }
 
     protected function extract(Collection $raw, int $idx, string $pattern = '', string $flags = ''): ?string
