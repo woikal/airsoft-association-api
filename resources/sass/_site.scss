@@ -1,0 +1,27 @@
+body {
+    background: rgb(30, 30, 30);
+    color: rgb(200, 200, 200);
+}
+
+.site-main {
+    background: rgb(50, 50, 50);
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 1200px;padding: 1em;
+}
+
+.content {
+}
+
+
+.site-header {
+    background: rgb(40, 40, 40);
+    border-bottom: 2px solid black;
+}
+
+.site-footer {
+    background: rgb(40, 40, 40);
+    border-top: 2px solid black;
+}

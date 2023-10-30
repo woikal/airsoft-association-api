@@ -18,5 +18,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/form', [ParseController::class, 'form'])->name('parser.form');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/parse', [ParseController::class, 'load'])->name('parser.load');
