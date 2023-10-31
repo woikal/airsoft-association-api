@@ -7,7 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title') - Airsoft Vereinsverzeichnis</title>
 
-    <link href="{{ asset('/css/style.css') }}" rel="stylesheet">
+    @googlefonts
+
+    <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 </head>
 <body>
 <header>
