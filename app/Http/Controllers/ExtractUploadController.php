@@ -28,35 +28,37 @@ class ExtractUploadController extends Controller
      */
     public function upload(UploadExtractRequest $request): Response
     {
-        if ($request->file('files')) {
-            $parser = new AssociationParser();
-            $extracts = [];
-            foreach ($request->file('files') as $file) {gitkr
-                if (!$file->isValid()) {
-                    continue;
-                }
-                $parser->setFile($file);
-
-                if (!$parser->validate()) {
-                    continue;
-                }
-
-                $filename = Hash::make($file->getFilename());
-                $file->move(public_path('uploads'), $filename);
-
-                $extracts[] = Extract::create([
-                    'original_filename' => $file->getFilename(),
-                    'filename'          => $filename,
-                    'zvr'               => $parser->getZvr(),
-                    'parsed'            => false,
-                    'uploaded_by'       => Auth::user(),
-                ]);
-            }
-            if (count($extracts)) {
-                return response()->view('pdf-parser.show', compact('extracts'));
-            }
+        if (!$request->file('files')) {
+            return response()->view('extract.form', ['notifications' => ['No files where uploaded']]);
         }
 
-        return response()->view('extract.form', ['notifications' => ['No files where uploaded']]);
+        $parser = new AssociationParser();
+        $extracts = [];
+        foreach ($request->file('files') as $file) {
+            if (!$file->isValid()) {
+                continue;
+            }
+            $parser->setFile($file);
+
+            if (!$parser->validate()) {
+                continue;
+            }
+
+            $filename = Hash::make($file->getFilename());
+            $file->move(public_path('uploads'), $filename);
+
+            $extracts[] = Extract::create([
+                'original_filename' => $file->getFilename(),
+                'filename'          => $filename,
+                'zvr'               => $parser->getZvr(),
+                'parsed'            => false,
+                'uploaded_by'       => Auth::user(),
+            ]);
+        }
+        if (!count($extracts)) {
+            return response()->view('extract.form', ['notifications' => ['No valid ZVR files where uploaded']]);
+        }
+
+        return response()->view('pdf-parser.show', compact('extracts'));
     }
 }

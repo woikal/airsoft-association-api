@@ -19,6 +19,10 @@ class CreateProvincesTable extends Migration
             $table->string('abbreviation');
             $table->string('slug')->unique();
         });
+
+        Schema::table('clubs', function (Blueprint $table) {
+            $table->foreignId('province_id')->nullable()->constrained();
+        });
     }
 
     /**
@@ -29,5 +33,8 @@ class CreateProvincesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('provinces');
+        Schema::table('clubs', function (Blueprint $table) {
+            $table->removeColumn('province_id');
+        });
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\GroupType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -14,12 +15,13 @@ class Club extends Model
         'recorded_at',
         'authority',
         'name',
-        'ZVR',
+        'zvr',
         'headquarter',
         'c/o',
         'postalAddress',
         'foundedAt',
     ];
+    protected $casts = ['type' => GroupType::class];
 
     public function province(): Relation
     {
@@ -30,6 +32,5 @@ class Club extends Model
     {
         return $this->hasMany(Official::class)->withPivot(['role', 'start_at', 'end_at']);
     }
-
 
 }

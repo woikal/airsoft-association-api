@@ -15,7 +15,6 @@ class ClubController extends Controller
         $validated = collect($request->validated());
 
         $club = new Club($validated->only([
-
             'recorded_at',
             'authority',
             'name',
@@ -28,7 +27,7 @@ class ClubController extends Controller
         ])->toArray());
 
         foreach ($validated->pluck('officials') as $parsedOfficial) {
-            $official = Official::findOrCreate([
+            $official = Official::updateOrCreate([
                 'first_name' => $parsedOfficial['first_name'],
                 'last_name'  => $parsedOfficial['last_name'],
             ]);
@@ -39,7 +38,7 @@ class ClubController extends Controller
             ]);
         }
 
-        $club->persist();
+        $club->save();
 
         return redirect('club.show', compact('club'));
     }
