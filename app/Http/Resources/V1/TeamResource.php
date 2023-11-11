@@ -4,7 +4,7 @@ namespace App\Http\Resources\V1;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ClubResource extends JsonResource
+class TeamResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,7 +18,7 @@ class ClubResource extends JsonResource
         return [
             'name'         => $this->name,
             'abbreviation' => $this->abbreviation,
-            'zvr'          => $this->zvr,
+            'club_id'      => $this->clubId,
             'location'     => $this->location,
             'founded'      => $this->founded_at,
             'province'     => [

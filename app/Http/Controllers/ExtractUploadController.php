@@ -31,7 +31,7 @@ class ExtractUploadController extends Controller
         if ($request->file('files')) {
             $parser = new AssociationParser();
             $extracts = [];
-            foreach ($request->file('files') as $file) {gitkr
+            foreach ($request->file('files') as $file) {
                 if (!$file->isValid()) {
                     continue;
                 }

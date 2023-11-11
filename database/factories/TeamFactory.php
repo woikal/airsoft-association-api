@@ -2,21 +2,22 @@
 
 namespace Database\Factories;
 
-use App\Models\Club;
+use App\Models\Team;
 use App\Models\Province;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-class ClubFactory extends Factory
+class TeamFactory extends Factory
 {
-    protected $model = Club::class;
+    protected $model = Team::class;
+
     /**
      * Define the model's default state.
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         $name = $this->faker->company;
         $slug = Str::slug($name);
@@ -24,7 +25,7 @@ class ClubFactory extends Factory
         return [
             'name'         => $name,
             'abbreviation' => preg_filter('#[^A-Z]#', '', $name),
-            'zvr'          => $this->faker->numerify('#########'),
+            'club_id'      => $this->faker->numerify('#########'),
             'location'     => $this->faker->address,
             'founded_at'   => $this->faker->dateTimeBetween('-20 years', '-1 year'),
             'province_id'  => Province::all()->random(),

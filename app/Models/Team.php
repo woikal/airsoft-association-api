@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
-class Club extends Model
+class Team extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,7 @@ class Club extends Model
         'recorded_at',
         'authority',
         'name',
-        'ZVR',
+        'club_id',
         'headquarter',
         'c/o',
         'postalAddress',
@@ -31,5 +31,8 @@ class Club extends Model
         return $this->hasMany(Official::class)->withPivot(['role', 'start_at', 'end_at']);
     }
 
-
+    public function isClub(): bool
+    {
+        return !empty($this->clubId);
+    }
 }

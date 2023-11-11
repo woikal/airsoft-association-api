@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Club;
+use App\Models\Team;
 use Illuminate\Database\Seeder;
 
-class ClubSeeder extends Seeder
+class TeamSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,7 @@ class ClubSeeder extends Seeder
      */
     public function run()
     {
-        Club::factory()->count(50)->create();
+        Team::factory()->count(50)->create(['club_id' => null]);
+        Team::factory()->count(50)->create();
     }
 }

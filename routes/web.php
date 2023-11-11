@@ -19,4 +19,5 @@ Route::get('/', function () {
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/teams', [App\Http\Controllers\HomeController::class, 'index'])->name('teams.index');
 Route::post('/parse', [ParseController::class, 'load'])->name('parser.load');

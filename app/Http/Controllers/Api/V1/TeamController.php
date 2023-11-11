@@ -3,25 +3,25 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Filters\V1\ClubFilter;
-use App\Http\Requests\StoreClubRequest;
-use App\Http\Requests\UpdateClubRequest;
-use App\Http\Resources\V1\ClubCollection;
-use App\Http\Resources\V1\ClubResource;
-use App\Models\Club;
+use App\Http\Filters\V1\TeamFilter;
+use App\Http\Requests\StoreTeamRequest;
+use App\Http\Requests\UpdateTeamRequest;
+use App\Http\Resources\V1\TeamCollection;
+use App\Http\Resources\V1\TeamResource;
+use App\Models\Team;
 use Illuminate\Http\Request;
 
-class ClubController extends Controller
+class TeamController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $filter = new ClubFilter();
-        $clubQuery = $filter->filter($request);
+        $filter = new TeamFilter();
+        $teamQuery = $filter->filter($request);
 
-        return new ClubCollection($clubQuery->with('province')->paginate()->appends($request->query()));
+        return new TeamCollection($teamQuery->with('province')->paginate()->appends($request->query()));
     }
 
     /**
@@ -37,11 +37,11 @@ class ClubController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \App\Http\Requests\StoreClubRequest $request
+     * @param \App\Http\Requests\StoreTeamRequest $request
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreClubRequest $request)
+    public function store(StoreTeamRequest $request)
     {
         //
     }
@@ -49,21 +49,21 @@ class ClubController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\Club $club
+     * @param \App\Models\Team $team
      */
-    public function show(Club $club)
+    public function show(Team $team)
     {
-        return new ClubResource($club);
+        return new TeamResource($team);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Models\Club $club
+     * @param \App\Models\Team $team
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Club $club)
+    public function edit(Team $team)
     {
         //
     }
@@ -71,12 +71,12 @@ class ClubController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \App\Http\Requests\UpdateClubRequest $request
-     * @param \App\Models\Club                     $club
+     * @param \App\Http\Requests\UpdateTeamRequest $request
+     * @param \App\Models\Team                     $team
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateClubRequest $request, Club $club)
+    public function update(UpdateTeamRequest $request, Team $team)
     {
         //
     }
@@ -84,11 +84,11 @@ class ClubController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Models\Club $club
+     * @param \App\Models\Team $team
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Club $club)
+    public function destroy(Team $team)
     {
         //
     }

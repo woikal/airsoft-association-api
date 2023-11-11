@@ -12,8 +12,13 @@ class Province extends Model
 
     public $timestamps = false;
 
+    public function teams(): Relation
+    {
+        return $this->hasMany(Team::class);
+    }
+
     public function clubs(): Relation
     {
-        return $this->hasMany(Club::class);
+        return $this->teams()->having('club_id');
     }
 }

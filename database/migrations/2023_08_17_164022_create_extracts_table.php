@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateExtractsTable extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -19,7 +18,7 @@ class CreateExtractsTable extends Migration
             $table->string('original_filename');
             $table->string('filename')->unique();
             $table->unsignedInteger('uploaded_by');
-            $table->string('zvr');
+            $table->string('club_id');
         });
     }
 
@@ -32,4 +31,4 @@ class CreateExtractsTable extends Migration
     {
         Schema::dropIfExists('extracts');
     }
-}
+};

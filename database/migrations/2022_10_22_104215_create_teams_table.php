@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClubsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -14,14 +14,15 @@ class CreateClubsTable extends Migration
      */
     public function up()
     {
-        Schema::create('clubs', function (Blueprint $table) {
+        Schema::create('teams', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('abbreviation')->nullable();
-            $table->string('zvr');
+            $table->string('club_id')->nullable();
             $table->string('location');
-            $table->date('founded_at');
+            $table->date('founded_at')->nullable();
             $table->foreignId('province_id')->nullable()->constrained();
+            $table->string('logo_filename')->nullable();
             $table->string('website');
             $table->string('facebook');
             $table->string('instagram');
@@ -42,4 +43,4 @@ class CreateClubsTable extends Migration
     {
         Schema::dropIfExists('clubs');
     }
-}
+};

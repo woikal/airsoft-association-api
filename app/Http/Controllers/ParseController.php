@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoadPdfRequest;
-use App\Http\Requests\StoreClubRequest;
+use App\Http\Requests\StoreTeamRequest;
 use App\Models\AssociationParser;
 use Illuminate\Http\Response;
 

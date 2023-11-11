@@ -16,6 +16,6 @@ class DatabaseSeeder extends Seeder
     {
         User::factory(10)->create();
         $this->call([ProvinceSeeder::class]);
-        $this->call([ClubSeeder::class]);
+        $this->call([TeamSeeder::class]);
     }
 }

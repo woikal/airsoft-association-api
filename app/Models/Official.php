@@ -12,8 +12,8 @@ class Official extends Model
 
     protected $fillable = '*';
 
-    public function clubs(): Relation
+    public function teams(): Relation
     {
-        return $this->belongsToMany(Club::class)->withPivot(['role', 'start_at', 'end_at']);
+        return $this->belongsToMany(Team::class)->withPivot(['role', 'start_at', 'end_at']);
     }
 }

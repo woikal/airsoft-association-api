@@ -3,19 +3,20 @@
 namespace App\Http\Filters\V1;
 
 use App\Http\Filters\ApiFilter;
-use App\Models\Club;
+use App\Models\Team;
 
-class ClubFilter extends ApiFilter
+class TeamFilter extends ApiFilter
 {
     public function __construct()
     {
-        $this->class = Club::class;
+        $this->class = Team::class;
     }
 
     protected array $allowedParameters = [
         'name'         => ['eq', 'ne'],
         'abbreviation' => ['eq', 'ne'],
-        'zvr'          => ['set', 'null', 'eq'],
+        'club'         => ['set'],
+        'club_id'      => ['set', 'null', 'eq'],
         'location'     => ['set', 'null', 'eq', 'ne'],
         'founded'      => ['set', 'null', 'eq', 'ne'],
         'province'     => ['set', 'null', 'eq', 'ne'],
