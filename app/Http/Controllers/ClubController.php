@@ -5,10 +5,37 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreClubRequest;
 use App\Models\Club;
 use App\Models\Official;
+use Filament\Forms\Form;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 
 class ClubController extends Controller
 {
+    public function index()
+    {
+        return view('club.index', ['clubs' => Club::all()]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param Club $club
+     *
+     * @return Response
+     */
+    public function show(Club $club)
+    {
+        return view('club.show', ['club' => $club]);
+    }
+    /**
+     * Display the specified resource.
+     *
+     * @return Response
+     */
+    public function create()
+    {
+        return view('club.create', );
+    }
 
     public function store(StoreClubRequest $request): RedirectResponse
     {

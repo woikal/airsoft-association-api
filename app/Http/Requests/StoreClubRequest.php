@@ -13,7 +13,7 @@ class StoreClubRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,15 @@ class StoreClubRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name'         => 'required',
+            'abbreviation' => 'string',
+            'club_id'      => 'required, integer',
+            'location'     => '',
+            'founded_at'   => 'greater:2000',
+            'website'      => '',
+            'facebook'     => '',
+            'instagram'    => '',
+            'email'        => '',
         ];
     }
 }

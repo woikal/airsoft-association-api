@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOfficialsTable extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -23,13 +22,12 @@ class CreateOfficialsTable extends Migration
         });
 
         Schema::create('club_official', function (Blueprint $table) {
-            $table->id();
             $table->timestamps();
             $table->string('role');
             $table->date('start_at');
             $table->date('end_at');
-            $table->foreignId('club');
-            $table->foreignId('official');
+            $table->foreignId('club_id');
+            $table->foreignId('official_id');
         });
     }
 
@@ -43,4 +41,4 @@ class CreateOfficialsTable extends Migration
         Schema::dropIfExists('club_official');
         Schema::dropIfExists('officials');
     }
-}
+};

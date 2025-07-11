@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProvincesTable extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -37,4 +36,4 @@ class CreateProvincesTable extends Migration
             $table->removeColumn('province_id');
         });
     }
-}
+};

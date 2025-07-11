@@ -17,7 +17,7 @@
     <div class="container site-menu">
         <a href="{{ route('dashboard.new') }}" class="menu-item">Team hinzufügen</a>
         <a href="{{ route('extract.index') }}" class="menu-item">ZVR Laden</a>
-        <a href="{{ route('parse') }}" class="menu-item">Parse</a>
+        {{-- <a href="{{ route('parse') }}" class="menu-item">Parse</a>--}}
     </div>
 </header>
 

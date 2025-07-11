@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 class ClubFactory extends Factory
 {
     protected $model = Club::class;
+
     /**
      * Define the model's default state.
      *
@@ -24,7 +25,7 @@ class ClubFactory extends Factory
         return [
             'name'         => $name,
             'abbreviation' => preg_filter('#[^A-Z]#', '', $name),
-            'zvr'          => $this->faker->numerify('#########'),
+            'club_id'      => $this->faker->numerify('#########'),
             'location'     => $this->faker->address,
             'founded_at'   => $this->faker->dateTimeBetween('-20 years', '-1 year'),
             'province_id'  => Province::all()->random(),

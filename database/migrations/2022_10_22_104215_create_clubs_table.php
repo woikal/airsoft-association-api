@@ -5,8 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClubsTable extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -19,8 +18,7 @@ class CreateClubsTable extends Migration
             $table->timestamps();
             $table->string('name');
             $table->string('abbreviation')->nullable();
-            $table->string('zvr');
-            $table->enum('type', GroupType::names());
+            $table->string('club_id');
             $table->string('location');
             $table->date('founded_at');
             $table->string('website');
@@ -42,4 +40,4 @@ class CreateClubsTable extends Migration
     {
         Schema::dropIfExists('clubs');
     }
-}
+};
