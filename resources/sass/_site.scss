@@ -1,6 +1,7 @@
 body {
     background: rgb(30, 30, 30);
     color: rgb(200, 200, 200);
+    font-family: Roboto, sans-serif;
 }
 
 .site-main {
@@ -9,7 +10,8 @@ body {
 
 .container {
     margin: 0 auto;
-    max-width: 1200px;padding: 1em;
+    max-width: 1200px;
+    padding: 1em;
 }
 
 .content {
@@ -21,7 +23,18 @@ body {
     border-bottom: 2px solid black;
 }
 
+.site-menu {
+    display: flex;
+    justify-content: flex-start;
+    gap: 2em;
+}
+
 .site-footer {
     background: rgb(40, 40, 40);
     border-top: 2px solid black;
+}
+
+.card {
+    background: rgb(40, 40, 40);
+    color: rgb(200, 200, 200);
 }

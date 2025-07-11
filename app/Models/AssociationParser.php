@@ -24,6 +24,7 @@ class AssociationParser
     protected Document $document;
     protected Collection $rawData;
     protected string $zvr;
+    protected Carbon $requested_at;
 
     /**
      * @throws \Exception
@@ -109,7 +110,10 @@ class AssociationParser
         foreach ($pages[0]->getTextArray() as $fragment) {
             if (preg_match('#^\d{9,12}$#', $fragment, $matches)) {
                 $this->zvr = $matches[0];
-
+            } elseif (preg_match('#^\d{2}.\d{2}.\d{4}$#', $fragment, $matches)) {
+                $this->requested_at = Carbon::createFromFormat('d.m.Y', $matches[0]);
+            }
+            if ($this->zvr && $this->requested_at) {
                 return true;
             }
         }
@@ -124,6 +128,15 @@ class AssociationParser
         }
 
         return $this->zvr ?? '';
+    }
+
+    public function getRecordDate(): Carbon
+    {
+        if (!isset($this->requested_at)) {
+            $this->validate();
+        }
+
+        return $this->requested_at;
     }
 
     protected function extract(Collection $raw, int $idx, string $pattern = '', string $flags = ''): ?string
@@ -190,6 +203,4 @@ class AssociationParser
 
         return $raw->values();
     }
-
-
 }
